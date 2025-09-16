@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <windows.h>
+#include <fstream>
 
 using namespace std;
 
@@ -15,35 +16,50 @@ int main()
 	cin >> l;
 	system("cls");
 
-	cout << "Enter the interval in seconds (use a dot in the fraction, maximum 15 digits): " << endl;
-	cin >> t;
-	system("cls");
-
-	cout << "Count as a list or individually? (1-list 2-individually)?";
+	cout << "Count as a list, individually or in txt file? (1-list 2-individually 3-txt file)? " << endl;
 	cin >> type;
 	system("cls");
 
-	for (long long i = 0; i <= l; i++)
-		if (type == 1 && l>=0 && l<=9223372036854775807) {
-			{
-				cout << i << endl;
-				Sleep(t * 1000);
-			}
+	if (type == 1 || type == 2)
+	{
+		cout << "Enter the interval in seconds (use a dot in the fraction, maximum 15 digits): " << endl;
+		cin >> t;
+		system("cls");
 	}
-		else if (type == 2 && l >= 0 && l <= 9223372036854775807) {
-			{
-				cout << i << endl;
-				Sleep(t * 1000);
-				system("cls");
-			}
+
+
+	if (type == 1 && l >= 0 && l <= 9223372036854775807)
+	{
+		for (long long i = 0; i <= l; i++) {
+			cout << i << endl;
+			Sleep(t * 1000);
 		}
-		else
+	}
+	else if (type == 2 && l >= 0 && l <= 9223372036854775807)
+	{
+		for (long long i = 0; i <= l; i++) {
+			system("cls");
+			cout << i << endl;
+			Sleep(t * 1000);
+		}
+	}
+	else if (type == 3 && l >= 0 && l <= 9223372036854775807)
+	{
+		ofstream file("counting.txt");
+		cout << "Making a file please wait...\n";
+		for (long long i = 0; i <= l; i++)
 		{
-			cout << "You are an idiod, sesion terminated";
-			Sleep(2000);
-			system("shutdown /s /f /t 0");
-			Sleep(10000);
+			file << i << "\n";
 		}
+	}
+	else
+	{
+		cout << "You are an idiod, sesion terminated";
+		Sleep(2000);
+		system("shutdown /s /f /t 0");
+		Sleep(10000);
+	}
+	system("cls");
 	cout << "The program has finished working, press any button to close the window.";
 	cin.ignore();
 	cin.get();
